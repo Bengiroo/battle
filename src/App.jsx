@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import Info from "./components/info";
+import ControlPanel from "./components/controlpanel"; // Import ControlPanel
 
 const App = () => {
   const gridSize = 10; // 10x10 grid
@@ -33,18 +34,6 @@ const App = () => {
       return newSet;
     });
   };
-
-  // Calculate win percentage and multiplier (logic only, no display)
-  const selectedShips = Array.from(selectedCells).map((index) => {
-    // Example: Map selected cells to ship sizes (this can be customized)
-    return Info.shipSizeOptions[0]; // Default to "Patrol Boat" for simplicity
-  });
-  const winPercentage = Info.calculateWinPercentage(selectedShips);
-  const multiplier = Info.calculateMultiplier(winPercentage);
-
-  // These values are calculated but not displayed
-  console.log("Win Percentage:", winPercentage);
-  console.log("Multiplier:", multiplier);
 
   return (
     <div className="app-container">
@@ -92,15 +81,7 @@ const App = () => {
       </div>
 
       {/* Control Panel */}
-      <div className="controls-panel">
-        {/* Top Subpanel */}
-        <div className="subpanel top-subpanel">
-          <div className="left-section">
-            <button onClick={() => setMode("offense")}>Offense</button>
-            <button onClick={() => setMode("defense")}>Defense</button>
-          </div>
-        </div>
-      </div>
+      <ControlPanel mode={mode} setMode={setMode} />
     </div>
   );
 };
