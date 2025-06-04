@@ -1,29 +1,61 @@
-import React from "react";
+import React, { useState } from "react";
 import "./gamegrid.css";
 
 const GameGrid = ({ mode, gridSize }) => {
-    // Example gridSize: { rows: 10, cols: 10 }
-    const gridCells = Array.from({ length: gridSize.rows * gridSize.cols });
+  const [selectedCells, setSelectedCells] = useState(new Set()); // Track selected cells
 
-    return (
+  // Handle cell click
+  const handleCellClick = (index) => {
+    setSelectedCells((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(index)) {
+        newSet.delete(index); // Deselect if already selected
+      } else {
+        newSet.add(index); // Select the cell
+      }
+      return newSet;
+    });
+  };
+
+  return (
+    <div
+      className="game-grid"
+      style={{
+        gridTemplateRows: `repeat(${gridSize.rows}, 1fr)`,
+        gridTemplateColumns: `repeat(${gridSize.cols}, 1fr)`,
+      }}
+    >
+      {Array.from({ length: gridSize.rows * gridSize.cols }).map((_, index) => (
         <div
-            className="game-grid"
-            style={{
-                gridTemplateRows: `repeat(${gridSize.rows}, 1fr)`,
-                gridTemplateColumns: `repeat(${gridSize.cols}, 1fr)`,
-            }}
+          key={index}
+          className="grid-item"
+          onClick={() => handleCellClick(index)}
         >
-            {gridCells.map((_, index) => (
-                <div className="grid-item" key={index}>
-                    <img
-                        src={mode === "offense" ? "a.png" : "b.png"}
-                        alt={mode === "offense" ? "Offense Tile" : "Defense Tile"}
-                        className="grid-tile"
-                    />
-                </div>
-            ))}
+          <img
+            src={
+              selectedCells.has(index)
+                ? mode === "offense"
+                  ? "assets/c.png"
+                  : "assets/d.png"
+                : mode === "offense"
+                ? "assets/a.png"
+                : "assets/b.png"
+            }
+            alt={
+              selectedCells.has(index)
+                ? mode === "offense"
+                  ? "Selected Offense Tile"
+                  : "Selected Defense Tile"
+                : mode === "offense"
+                ? "Offense Tile"
+                : "Defense Tile"
+            }
+            className="grid-tile"
+          />
         </div>
-    );
+      ))}
+    </div>
+  );
 };
 
 export default GameGrid;

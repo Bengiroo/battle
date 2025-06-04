@@ -4,6 +4,8 @@ import "./App.css";
 const App = () => {
   const gridSize = 10; // 10x10 grid
   const [cellSize, setCellSize] = useState(0); // Dynamic size of each cell
+  const [mode, setMode] = useState("offense"); // "offense" or "defense"
+  const [selectedCells, setSelectedCells] = useState(new Set()); // Track selected cells
 
   // Dynamically calculate cell size based on viewport dimensions
   useEffect(() => {
@@ -18,6 +20,19 @@ const App = () => {
     return () => window.removeEventListener("resize", calculateCellSize);
   }, []);
 
+  // Handle cell click
+  const handleCellClick = (index) => {
+    setSelectedCells((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(index)) {
+        newSet.delete(index); // Deselect if already selected
+      } else {
+        newSet.add(index); // Select the cell
+      }
+      return newSet;
+    });
+  };
+
   return (
     <div className="app-container">
       {/* Game Grid */}
@@ -28,20 +43,39 @@ const App = () => {
           gridTemplateColumns: `repeat(${gridSize}, ${cellSize}px)`,
         }}
       >
-        {Array.from({ length: gridSize * gridSize }).map((_, index) => {
-          const row = Math.floor(index / gridSize) + 1; // Calculate row (1-indexed)
-          const col = (index % gridSize) + 1; // Calculate column (1-indexed)
-          return (
-            <div
-              key={index}
-              className="grid-item"
-            >
-              <span className="cell-label">
-                {row},{col}
-              </span>
-            </div>
-          );
-        })}
+        {Array.from({ length: gridSize * gridSize }).map((_, index) => (
+          <div
+            key={index}
+            className="grid-item"
+            onClick={() => handleCellClick(index)}
+          >
+            <img
+              src={
+                selectedCells.has(index)
+                  ? mode === "offense"
+                    ? "assets/c.png"
+                    : "assets/d.png"
+                  : mode === "offense"
+                    ? "assets/a.png"
+                    : "assets/b.png"
+              }
+              alt={
+                selectedCells.has(index)
+                  ? mode === "offense"
+                    ? "Selected Offense Tile"
+                    : "Selected Defense Tile"
+                  : mode === "offense"
+                    ? "Offense Tile"
+                    : "Defense Tile"
+              }
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+              }}
+            />
+          </div>
+        ))}
       </div>
 
       {/* Control Panel */}
@@ -49,36 +83,8 @@ const App = () => {
         {/* Top Subpanel */}
         <div className="subpanel top-subpanel">
           <div className="left-section">
-            <div className="toggle">Toggle 1</div>
-            <div className="toggle">Toggle 2</div>
-            <div className="balance">Balance</div>
-          </div>
-          <div className="middle-section">
-            <button className="rotation-button">Rotate</button>
-          </div>
-          <div className="right-section">
-            <button className="main-action-button">Action</button>
-          </div>
-        </div>
-
-        {/* Middle Subpanel */}
-        <div className="subpanel middle-subpanel">
-          <div className="info-boxes">
-            <div className="info-box">Info 1</div>
-            <div className="info-box">Info 2</div>
-          </div>
-          <div className="sliders">
-            <input type="range" min="0" max="100" className="slider" />
-            <input type="range" min="0" max="100" className="slider" />
-          </div>
-        </div>
-
-        {/* Bottom Subpanel */}
-        <div className="subpanel bottom-subpanel">
-          <input type="text" placeholder="Balance Input" className="balance-input" />
-          <div className="tabs">
-            <button className="tab active">Manual</button>
-            <button className="tab">Auto</button>
+            <button onClick={() => setMode("offense")}>Offense</button>
+            <button onClick={() => setMode("defense")}>Defense</button>
           </div>
         </div>
       </div>
