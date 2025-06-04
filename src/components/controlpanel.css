@@ -1,0 +1,142 @@
+/* Controls Panel */
+.controls-panel {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background-color: rgba(31, 41, 55, 0.8);
+  /* Semi-transparent dark gray */
+  position: absolute;
+  border: 2px dotted red;
+  /* Debugging border */
+
+  /* Default Portrait Mode */
+  height: 40vh;
+  /* Default: 40% of viewport height */
+  width: 100%;
+  /* Full width in portrait mode */
+  bottom: 0;
+  /* Stick to the bottom of the viewport */
+}
+
+/* Subpanels */
+.subpanel {
+  display: flex;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.top-subpanel {
+  display: flex;
+  justify-content: space-between;
+}
+
+.left-section {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  /* 30% for left section */
+}
+
+/* Media Queries */
+
+/* General Portrait Mode */
+@media (orientation: portrait) {
+  .controls-panel {
+    height: 40vh;
+    /* Default: 40% of viewport height */
+    width: 100%;
+    /* Full width in portrait mode */
+    bottom: 0;
+    /* Stick to the bottom of the viewport */
+    position: absolute;
+    border-left: none;
+    /* No left border in portrait */
+    border-top: 2px dotted red;
+    /* Debugging border */
+  }
+}
+
+/* Portrait Mode for All Devices with Minimum Width of 515px */
+@media (min-width: 515px) and (orientation: portrait) {
+  .controls-panel {
+    height: 23vh;
+    /* Reduce control panel height to 23% of viewport height */
+    width: 100%;
+    /* Full width in portrait mode */
+    bottom: 0;
+    /* Stick to the bottom of the viewport */
+    position: absolute;
+    border-left: none;
+    /* No left border in portrait */
+    border-top: 2px dotted red;
+    /* Debugging border */
+  }
+}
+
+/* iPad Pro in Portrait Mode */
+@media (min-width: 1024px) and (max-width: 1366px) and (orientation: portrait) and (device-aspect-ratio: 3/4) {
+  .controls-panel {
+    height: 24vh;
+    /* 24% of viewport height for iPad Pro */
+    width: 100%;
+    /* Full width in portrait mode */
+    bottom: 0;
+    /* Stick to the bottom of the viewport */
+    position: absolute;
+    border-left: none;
+    /* No left border in portrait */
+    border-top: 2px dotted red;
+    /* Debugging border */
+  }
+}
+
+/* iPad Air in Portrait Mode */
+@media (min-width: 820px) and (max-width: 1180px) and (orientation: portrait) and (device-aspect-ratio: 3/4) {
+  .controls-panel {
+    height: 29vh;
+    /* 29% of viewport height for iPad Air */
+    width: 100%;
+    /* Full width in portrait mode */
+    bottom: 0;
+    /* Stick to the bottom of the viewport */
+    position: absolute;
+    border-left: none;
+    /* No left border in portrait */
+    border-top: 2px dotted red;
+    /* Debugging border */
+  }
+}
+
+/* Landscape Mode (General) */
+@media (orientation: landscape) {
+  .controls-panel {
+    width: 35vw;
+    /* 35% of viewport width */
+    height: 100%;
+    /* Full height in landscape mode */
+    right: 0;
+    /* Stick to the right of the viewport */
+    position: absolute;
+    border-top: none;
+    /* No top border in landscape */
+    border-left: 2px dotted red;
+    /* Debugging border */
+  }
+}
+
+/* iPad Pro Specific in Landscape Mode */
+@media (min-width: 1024px) and (max-width: 1366px) and (orientation: landscape) {
+  .controls-panel {
+    width: 23vw;
+    /* 23% of viewport width for iPad Pro */
+    height: 100%;
+    /* Full height in landscape mode */
+    right: 0;
+    /* Stick to the right of the viewport */
+    position: absolute;
+    border-top: none;
+    /* No top border */
+    border-left: 2px dotted red;
+    /* Debugging border */
+  }
+}
