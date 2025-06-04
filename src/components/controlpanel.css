@@ -165,7 +165,7 @@
   display: flex;
   flex-direction: column;
   /* Stack toggles and rotation button vertically */
-  gap: 0.5rem;
+  gap: rem;
   /* Add spacing between items */
 }
 
@@ -262,38 +262,40 @@ label {
   /* Remove padding */
 }
 
-.rotate-button:hover {
-  background-color: #4b5563;
-  /* Lighter gray on hover */
-  transform: scale(1.05);
-  /* Slight zoom effect */
+.rotate-button.horizontal {
+  transform: rotate(0deg);
+  /* Default horizontal orientation */
 }
 
-.rotate-button:active {
-  background-color: #2563eb;
-  /* Blue background on click */
-  transform: scale(0.95);
-  /* Slight shrink effect */
+.rotate-button.vertical {
+  transform: rotate(90deg);
+  /* Rotate to vertical orientation */
 }
 
 .fire-button {
-  width: 7rem;
+  width: 10rem;
   /* Increase button width */
-  height: 7rem;
+  height: 10rem;
   /* Increase button height */
   background-color: transparent;
   /* Transparent background */
   border: none;
   /* Remove default button border */
   cursor: pointer;
+  /* Pointer cursor */
   display: flex;
   justify-content: center;
+  /* Center content horizontally */
   align-items: center;
+  /* Center content vertically */
   transition: transform 0.3s;
+  /* Add hover effect */
+  margin-left: -2rem;
+  /* Move button to the left */
 }
 
 .fire-button:hover {
-  transform: scale(1.3);
+  transform: scale(1.1);
   /* Slight zoom effect on hover */
 }
 
@@ -302,20 +304,13 @@ label {
   /* Slight shrink effect on click */
 }
 
-.fire-gif {
+.fire-image {
   width: 100%;
-  /* Scale gif to fit button */
+  /* Scale image to fit button */
   height: 100%;
-  /* Scale gif to fit button */
+  /* Scale image to fit button */
   object-fit: contain;
-  /* Ensure the gif fits properly */
-}
-
-@media (orientation: portrait) {
-  .fire-gif {
-    transform: scale(0.7);
-    /* Scale down to 70% in portrait mode */
-  }
+  /* Ensure the image fits properly */
 }
 
 .tabs {
@@ -389,7 +384,7 @@ label {
   /* Add spacing above and below */
   padding: 0.5rem;
   /* Add padding for spacing */
-  background-color: rgba(31, 41, 55, 0.8);
+  background-color: rgb(255, 196, 0);
   /* Match panel background */
   border-radius: 0.5rem;
   /* Rounded corners */
@@ -419,6 +414,7 @@ label {
 .bet-buttons {
   display: flex;
   flex: 1;
+  margin-bottom: px;
   /* Make buttons take less space */
   justify-content: space-between;
   /* Space buttons evenly */
@@ -462,14 +458,13 @@ label {
 
 .info-sliders {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   /* Align blocks and sliders horizontally */
   align-items: center;
   /* Align items vertically */
   width: 100%;
   /* Full width */
-  margin: 0.5rem 0;
-  /* Add spacing above and below */
+  margin-bottom: 0;
   padding: 0.5rem;
   /* Add padding for spacing */
   background-color: #1f2937;
@@ -485,6 +480,7 @@ label {
   flex-direction: column;
   /* Stack info blocks vertically */
   gap: 0.5rem;
+  margin-right: 9px;
   /* Add spacing between blocks */
 }
 
@@ -514,7 +510,7 @@ label {
   display: flex;
   flex-direction: column;
   /* Stack sliders vertically */
-  gap: 1rem;
+  gap: 2.5rem;
   /* Add spacing between sliders */
   align-items: center;
   /* Align sliders with the center of the first info block */
@@ -523,9 +519,9 @@ label {
 .slider {
   width: 100%;
   /* Full width */
-  height: 1rem;
+  height: .5rem;
   /* Adjust slider height */
-  background-color: #4b5563;
+  background-color: #000000;
   /* Gray background */
   border-radius: 0.5rem;
   /* Rounded corners */
@@ -540,7 +536,7 @@ label {
   /* Thumb width */
   height: 1rem;
   /* Thumb height */
-  background-color: #2563eb;
+  background-color: hsl(91, 89%, 49%);
   /* Blue thumb */
   border-radius: 50%;
   /* Rounded thumb */
@@ -556,6 +552,7 @@ label {
   /* Align items vertically */
   gap: 1rem;
   /* Add spacing between balance display and rotate button */
+  margin-left: -80px;
 }
 
 .balance-display {

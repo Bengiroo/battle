@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import "./controlpanel.css";
 
 const ControlPanel = ({ mode, setMode, rotateMissile, rotateShip, fire }) => {
+  const [isVertical, setIsVertical] = useState(false); // Track orientation state
+
   const toggleMode = () => {
     setMode((prevMode) => (prevMode === "offense" ? "defense" : "offense"));
   };
@@ -12,6 +14,7 @@ const ControlPanel = ({ mode, setMode, rotateMissile, rotateShip, fire }) => {
     } else {
       rotateShip();
     }
+    setIsVertical((prev) => !prev); // Toggle orientation
   };
 
   return (
@@ -49,20 +52,19 @@ const ControlPanel = ({ mode, setMode, rotateMissile, rotateShip, fire }) => {
 
         {/* Rotation Button and Balance Display */}
         <div className="rotate-container">
-          <div className="balance-display">$10,000</div>
-          <button className="rotate-button" onClick={handleRotate}>
+          <div className="balance-display"> $10,000</div>
+          <button
+            className={`rotate-button ${isVertical ? "vertical" : "horizontal"}`}
+            onClick={handleRotate}
+          >
             Rotate
           </button>
         </div>
 
         {/* Fire Button */}
-        <button className="fire-button" onClick={fire}>
-          <img
-            src={mode === "offense" ? "/assets/a.gif" : "/assets/c.gif"}
-            alt={mode === "offense" ? "Fire" : "Anchor"}
-            className="fire-gif"
-          />
-        </button>
+        <div className="fire-button" onClick={fire}>
+          <img src="/assets/z.png" alt="Fire" className="fire-image" />
+        </div>
       </div>
 
       {/* Info Blocks and Sliders */}
